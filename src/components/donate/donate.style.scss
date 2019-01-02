@@ -1,5 +1,7 @@
+@import "../shared-styles/colors.scss";
+
 :host {
-  --app-primary-color: #4285f4;
+  --app-primary-color: $indigo-500-color;
   --app-secondary-color: black;
 
   display: block;
@@ -11,7 +13,7 @@ app-drawer-layout:not([narrow]) [drawer-toggle] {
 
 app-header {
   color: #fff;
-  background-color: var(--app-primary-color);
+  background-color: $indigo-500-color;
 
   paper-icon-button {
     --paper-icon-button-ink-color: #fff;

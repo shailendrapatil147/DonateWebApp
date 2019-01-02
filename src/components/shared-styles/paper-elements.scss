@@ -1,0 +1,36 @@
+  @import "colors.scss";
+  
+  paper-button.custom {
+    --paper-button-ink-color: var(--paper-pink-a200);
+    /* These could also be individually defined for each of the
+      specific css classes, but we'll just do it once as an example */
+    --paper-button-flat-keyboard-focus: {
+      background-color: var(--paper-pink-a200) !important;
+      color: white !important;
+    };
+    --paper-button-raised-keyboard-focus: {
+      background-color: var(--paper-pink-a200) !important;
+      color: white !important;
+    };
+  }
+
+  paper-button.custom:hover {
+    background-color: var(--paper-indigo-100);
+  }
+
+  paper-button.indigo {
+      background-color: $indigo-500-color;
+      color: white;
+      --paper-button-raised-keyboard-focus: {
+        background-color: var(--paper-indigo-100) !important;
+        color: white !important;
+      };
+  }
+
+  paper-button.gray {
+    color: var(--paper-gray-a200);
+    --paper-button-flat-keyboard-focus: {
+      background-color: var(--paper-indigo-100) !important;
+      color: white !important;
+    };
+  }

@@ -22,7 +22,7 @@
 ### Available scripts
 ```bash
 npm start
-# Starts webpack dev server with live reload on http://localhost:8080
+# Starts webpack dev server with live reload on http://localhost:1534
 
 npm build
 # Builds the production ready website in the build/ directory

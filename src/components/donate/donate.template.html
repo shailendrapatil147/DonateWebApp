@@ -18,6 +18,7 @@
       <a name="view1" href="[[rootPath]]view1">View One</a>
       <a name="view2" href="[[rootPath]]view2">View Two</a>
       <a name="view3" href="[[rootPath]]view3">View Three</a>
+      <a name="login" href="[[rootPath]]login">Login</a>
     </iron-selector>
   </app-drawer>
 
@@ -26,10 +27,10 @@
 
     <app-header slot="header" condenses reveals effects="waterfall">
       <app-toolbar>
-        <paper-icon-button icon="my-icons:menu" drawer-toggle></paper-icon-button>
+        <paper-icon-button icon="default-icons:menu" drawer-toggle></paper-icon-button>
         <div main-title>Donate App</div>
-        <a name="login-page" href="[[rootPath]]login-page" hidden$="[[storedUser.loggedin]]">Log in</a>
-        <a name="register-page" href="[[rootPath]]register-page" hidden$="[[storedUser.loggedin]]"> / Sign Up</a>
+        <!-- <a name="login" href="[[rootPath]]login" hidden$="[[storedUser.loggedin]]">Log in</a>
+        <a name="register" href="[[rootPath]]register" hidden$="[[storedUser.loggedin]]"> / Sign Up</a> -->
         <!-- <div hidden$="[[!storedUser.loggedin]]">
           <span class="greeting">Hi [[storedUser.name]]!</span>
           <log-out stored-user="{{storedUser}}" link></log-out>
@@ -45,6 +46,8 @@
       <my-view1 name="view1"></my-view1>
       <my-view2 name="view2" route="{{subroute}}"></my-view2>
       <my-view3 name="view3" route="{{subroute}}"></my-view3>
+      <login-page name="login" route="{{subroute}}"></login-page>
+      <register-page name="register" route="{{subroute}}"></register-page>
       <my-view404 name="view404"></my-view404>
     </iron-pages>
   </app-header-layout>

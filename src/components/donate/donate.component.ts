@@ -54,7 +54,7 @@ export class DonateApp extends PolymerElement {
   _routePageChanged(page: string) {
     // If no page was found in the route data, page will be an empty string.
     // Default to 'view1' in that case.
-    this.page = page || 'view1';
+    this.page = page || 'login';
 
     // Close a non-persistent drawer when the page & route are changed.
     if (!this.$.drawer.persistent) {
@@ -64,10 +64,11 @@ export class DonateApp extends PolymerElement {
 
   _pageChanged(page: string) {
     // Load page import on demand. Show 404 page if fails
-    import(
-      /* webpackMode: "lazy" */
-      `../${page}/${page}.component`
-      ).catch(this._showPage404.bind(this));
+    
+      import(
+        /* webpackMode: "lazy" */
+        `../${page}/${page}.component`
+        ).catch(this._showPage404.bind(this));
   }
 
   _showPage404() {

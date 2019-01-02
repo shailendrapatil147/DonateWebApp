@@ -1,4 +1,6 @@
 WebComponents.waitFor(() =>
+  import('./common'));
+WebComponents.waitFor(() =>
   // At this point we are guaranteed that all required polyfills have
   // loaded, and can use web components API's.
   // The standard pattern is to load element definitions that call

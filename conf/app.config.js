@@ -47,7 +47,7 @@ module.exports = (production) => ({
   // Webpack dev server settings
   devServer: {
     // The port where webpack dev server should serve the app content
-    port: env.DEV_SERVER_PORT || 8080,
+    port: env.DEV_SERVER_PORT || 1534,
 
     // Set this to true if you want webpack dev server
     // to serve your content over HTTP/2
