@@ -10,6 +10,7 @@ import '@polymer/app-route/app-route';
 import '@polymer/iron-pages/iron-pages';
 import '@polymer/iron-selector/iron-selector';
 import '@polymer/paper-icon-button/paper-icon-button';
+import '@polymer/paper-toast';
 
 import view from './donate.template.html';
 import style from './donate.style.scss';
@@ -17,6 +18,9 @@ import '../icons';
 // Have to include the shared styles here even if they're not directly used
 // so that they're bundled within the app.js and not within each dynamic view
 import '../shared-styles';
+import {store} from "../../redux/stores/store";
+import * as actions from'../../redux/actions';
+import { User } from '../../models/graphql/user';
 
 export class DonateApp extends PolymerElement {
   $: any;
@@ -28,6 +32,25 @@ export class DonateApp extends PolymerElement {
 
   static get template() {
     return html([`<style>${style}</style>${view}`]);
+  }
+
+  ready(){
+    super.ready();    
+  store.subscribe(() => this._subscribe());
+  }
+
+  _subscribe(): void {
+    let state = store.getState();
+    if(state.loginreducer.user && state.loginreducer.user.email )
+      this.loggedin = true;
+    else
+      this.loggedin = false;
+
+    if(state.errorreducer.error && state.errorreducer.error.length > 0){
+      this.error = state.errorreducer.error;
+      this.toggleError();
+      store.dispatch(actions.error(""));
+    }
   }
 
   static get properties() {
@@ -42,6 +65,19 @@ export class DonateApp extends PolymerElement {
       // This shouldn't be necessary, but the Analyzer isn't picking up
       // Polymer.Element#rootPath
       rootPath: String,
+      loggedin:{
+        type: Boolean,
+        value: false,
+        notify: true
+      },
+      user:{
+        type: User
+      },
+      error: String,
+      show: {
+        type: Boolean,
+        value: false
+      }
     };
   }
 
@@ -57,9 +93,14 @@ export class DonateApp extends PolymerElement {
     this.page = page || 'login';
 
     // Close a non-persistent drawer when the page & route are changed.
-    if (!this.$.drawer.persistent) {
-      this.$.drawer.close();
-    }
+    // if (!this.$.drawer.persistent) {
+    //   this.$.drawer.close();
+    // }
+    // const [route, subroute] = path.replace(this.rootPath, '').split('/');
+    // if (route !== 'view2') {
+    //   return;
+    // }
+    // this.page = subroute || '';
   }
 
   _pageChanged(page: string) {
@@ -73,5 +114,14 @@ export class DonateApp extends PolymerElement {
 
   _showPage404() {
     this.page = 'view404';
+  }
+
+  logout(){
+    store.dispatch(actions.userlogout());
+    this.set('route.path', '/login');
+  }
+
+  toggleError(){
+    this.show = !this.show;
   }
 }

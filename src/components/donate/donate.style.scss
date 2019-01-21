@@ -36,3 +36,12 @@ app-header {
     }
   }
 }
+
+.toast{
+  --paper-toast-background-color: red;
+  --paper-toast-color: white;
+}
+
+.toastCancel{
+  color: black;
+}

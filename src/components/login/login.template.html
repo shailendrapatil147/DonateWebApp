@@ -1,12 +1,11 @@
 <app-location route="{{route}}"></app-location>
-
 <div class="card login">
-  <h1>Login</h1>
-  <div class="login-block">
-    <paper-input label=" username"><iron-icon icon = "account-circle"  slot="prefix"></iron-icon></paper-input>
-    <paper-input label=" password" type="password"><iron-icon icon = "lock-outline" slot="prefix"></iron-icon></paper-input>
-    <paper-button raised class="indigo">Login</paper-button>
-    <paper-button class="custom gray"  on-click="register">Register</paper-button>
+  <h1>Donate App</h1>
+  <div class="">
+    <paper-input id="userEmail" label="Email" auto-validate required type="email" value="{{user.email}}" error-message="Invalid email"><iron-icon icon = "account-circle"  slot="prefix"></iron-icon></paper-input>
+    <paper-input id="password" label="password" auto-validate required type="password" value="{{user.password}}" error-message="required"><iron-icon icon = "lock-outline" slot="prefix"></iron-icon></paper-input>
+    <paper-button raised class="indigo m-t-1-5" on-click="login">Login</paper-button>
+    <paper-button class="custom gray m-t-1-5"  on-click="register">Register</paper-button>
 
     <!-- <password-validator validator-name="password"></password-validator>
     <paper-input label="pwd" validator="password" auto-validate required error-message="invalid!"></paper-input> -->

@@ -5,6 +5,7 @@ import defaultscss from './default.scss';
 import colorsscss from './colors.scss';
 import fontscss from './font.scss';
 import paperelementsscss from './paper-elements.scss';
+import position from './position.css';
 
 const documentContainer = document.createElement('div');
 documentContainer.setAttribute('style', 'display: none;');
@@ -15,5 +16,6 @@ documentContainer.innerHTML =
     colorsscss +
     fontscss +
     paperelementsscss+
+    position+
   '</style></template></dom-module>';
 document.head.appendChild(documentContainer);

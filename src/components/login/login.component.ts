@@ -10,9 +10,34 @@ import '../../common/validators/password-validator';
 import view from './login.template.html';
 import style from './login.style.scss';
 import '../shared-styles';
+import {store} from "../../redux/stores/store";
+import * as actions from'../../redux/actions';
+import { userQueryApolloClient } from'../../services/user-query-apollo-client';
+import { loginUser } from '../../models/graphql/user';
+import {User} from'../../models/graphql/user';
+import {LoginErrors, WebApiErrors} from'../../common/error-massages';
 
 export class LoginPage extends PolymerElement {
   $: any;
+  constructor(){
+    super();
+  }
+  
+  ready(){
+    super.ready();
+    store.subscribe(() => this._subscribe());
+  }
+
+  _subscribe(): void {
+    //console.log(store.getState());
+    var state = store.getState();
+
+    if(state.loginreducer.user){
+        if(state.loginreducer.user instanceof User){
+          this.set('route.path', '/view1');
+        }      
+    }      
+  }
 
   static get is() {
     return 'login-page';
@@ -22,16 +47,40 @@ export class LoginPage extends PolymerElement {
     return html([`<style include="shared-styles">${style}</style>${view}`]);
   }
 
-  register() {
-      this.set('route.path', '/register');
-    }
-
-    pwdvalidate(value:any){
-      if (value.length <3){
-        return true;
-    }else{
-      return false;
-    }
+  static get properties() {
+    return {
+        user:{
+          type: User,
+          value: {
+              email: "",
+              password: ""
+          }
+      }
     }
   }
+
+  login(){
+    //store.dispatch({type: ActionTypes.USER_LOGIN, data: {user :{ username :'username', password :'password'}} as any});
+    var client = userQueryApolloClient.query({
+      query: loginUser,
+      variables:{
+        email: this.user.email,
+        password: this.user.password,
+      }
+    }).then((data: any) => {if(data.data.user ){
+                              this.set('route.path', '/view1');
+                              store.dispatch(actions.userlogin(data.data.user));                              
+                            }
+                            else{
+                              store.dispatch(actions.error(LoginErrors.INVALIDUSERNAME));
+                          }})
+      .catch((error: any) => store.dispatch(actions.error(WebApiErrors.INTERNALSERVERERROR)));
+
+      console.log(client);
+  }
+
+  register() {  
+      this.set('route.path', '/register');
+    }
+}
 window.customElements.define(LoginPage.is, LoginPage);

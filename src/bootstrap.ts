@@ -1,5 +1,19 @@
 WebComponents.waitFor(() =>
   import('./common'));
+
+  WebComponents.waitFor(() =>
+  import('./models'));
+
+WebComponents.waitFor(() =>
+  import('./services'));
+WebComponents.waitFor(() =>
+import('./redux'));
+
+WebComponents.waitFor(() =>
+import('./elements'));
+// WebComponents.waitFor(() =>
+// import('./elements'));
+
 WebComponents.waitFor(() =>
   // At this point we are guaranteed that all required polyfills have
   // loaded, and can use web components API's.
@@ -9,3 +23,4 @@ WebComponents.waitFor(() =>
   // polyfill to wait until all definitions are loaded and then upgrade
   // the document in one batch, for better performance.
   import('./components'));
+  

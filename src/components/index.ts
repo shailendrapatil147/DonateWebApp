@@ -7,7 +7,7 @@ setRootPath(window.Polymer.rootPath);
 setPassiveTouchGestures(true);
 
 const elements = [
-  DonateApp,
+    DonateApp,
   // Add your STATIC elements here
 ];
 
