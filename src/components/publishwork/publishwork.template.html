@@ -1,0 +1,9 @@
+<app-location route="{{route}}"></app-location>
+<div class="card register">
+  <h1>Publish work!</h1>
+  <paper-input label="Title"  auto-validate required error-message="required" value="{{work.title}}"></paper-input>
+  <paper-textarea label="Description" rows="3" maxRows="5" char-counter maxlength="500" value="{{work.description}}"></paper-textarea>  
+  <vaadin-date-picker label="Start" value="{{work.startDate}}"></vaadin-date-picker>
+  <vaadin-date-picker label="End" value="{{work.endDate}}"></vaadin-date-picker>
+  <paper-button raised class="indigo" on-tap="publishWork">Publish</paper-button>
+</div>

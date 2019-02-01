@@ -1,8 +1,8 @@
 import { ActionTypes as types } from '../constants';
 import {User} from'../../models/graphql/user';
 
-var user = new User();
-let defaultState = {
+const user = new User();
+const defaultState = {
     user
 };
 

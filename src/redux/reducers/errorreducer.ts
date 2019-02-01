@@ -1,5 +1,5 @@
 import { ActionTypes as types } from '../constants';
-let defaultState = {
+const defaultState = {
     error: String
 };
 

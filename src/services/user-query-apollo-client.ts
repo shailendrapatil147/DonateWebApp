@@ -4,13 +4,12 @@ import {InMemoryCache} from'apollo-cache-inmemory';
 //import { ApolloLink, concat } from 'apollo-link';
 
 
-const httpLink = new HttpLink({ uri: 'https://localhost:44397/graphql'});
+const httpLink = new HttpLink({ uri: 'https://localhost:5001/graphql/' });
 
 export const userQueryApolloClient = new ApolloClient({
   link:  httpLink,
   cache: new InMemoryCache()
 });
-
 //const httpLink = new HttpLink({ uri: 'https://localhost:44397/graphql', 
                               //fetchOptions:{
                               //     mode:'no-cors',

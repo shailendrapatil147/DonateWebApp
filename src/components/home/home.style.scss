@@ -1,0 +1,38 @@
+:host {
+  display: block;
+  padding: 10px;
+}
+.view
+{
+min-height: 500px;
+min-width: relative; 
+}
+
+#sizedImgDiv {
+background-size: contain !important;
+}
+
+body {
+font-family: 'Roboto', sans-serif;
+padding: 0;
+margin: 0;
+}
+
+demo-snippet {
+--demo-snippet-demo: {
+ @apply --layout-vertical;
+};
+}
+iron-image {
+display: block;
+//background-color: var(--paper-grey-200);  
+}
+skeleton-carousel {
+--skeleton-carousel: {
+ // background-color: var(--paper-grey-50);
+};
+--skeleton-carousel-item: {
+  text-align: center;
+//  background-color: var(--paper-grey-100);
+};
+}

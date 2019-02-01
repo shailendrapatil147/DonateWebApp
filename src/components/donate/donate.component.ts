@@ -36,15 +36,22 @@ export class DonateApp extends PolymerElement {
 
   ready(){
     super.ready();    
-  store.subscribe(() => this._subscribe());
+    store.subscribe(() => this._subscribe());
   }
 
   _subscribe(): void {
-    let state = store.getState();
-    if(state.loginreducer.user && state.loginreducer.user.email )
+    const state = store.getState();
+    if(state.loginreducer.user && state.loginreducer.user.email ) {
       this.loggedin = true;
-    else
-      this.loggedin = false;
+      this.user = state.loginreducer.user;
+      if(state.loginreducer.user.roleId == 1){
+        this.isNGO = true;
+      }
+    }
+    else {
+        this.isNGO = false;
+        this.loggedin = false;
+    }
 
     if(state.errorreducer.error && state.errorreducer.error.length > 0){
       this.error = state.errorreducer.error;
@@ -77,7 +84,12 @@ export class DonateApp extends PolymerElement {
       show: {
         type: Boolean,
         value: false
-      }
+      },
+      isNGO:{
+        type: Boolean,
+        value: false,
+        notify: true
+      },
     };
   }
 
@@ -89,18 +101,17 @@ export class DonateApp extends PolymerElement {
 
   _routePageChanged(page: string) {
     // If no page was found in the route data, page will be an empty string.
-    // Default to 'view1' in that case.
-    this.page = page || 'login';
+    // Default to 'home' in that case.
+    this.page = page || 'home';
 
     // Close a non-persistent drawer when the page & route are changed.
     // if (!this.$.drawer.persistent) {
     //   this.$.drawer.close();
     // }
-    // const [route, subroute] = path.replace(this.rootPath, '').split('/');
-    // if (route !== 'view2') {
-    //   return;
+    // const [route, subroute] = page.replace(this.rootPath, '').split('/');
+    // if (subroute != '') {
+    //   this.page = 'home';
     // }
-    // this.page = subroute || '';
   }
 
   _pageChanged(page: string) {

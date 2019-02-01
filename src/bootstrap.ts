@@ -9,8 +9,8 @@ WebComponents.waitFor(() =>
 WebComponents.waitFor(() =>
 import('./redux'));
 
-WebComponents.waitFor(() =>
-import('./elements'));
+// WebComponents.waitFor(() =>
+// import('./elements'));
 // WebComponents.waitFor(() =>
 // import('./elements'));
 

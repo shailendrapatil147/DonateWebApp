@@ -1,0 +1,13 @@
+<div class="card">
+    <div>
+    <skeleton-carousel dots nav>
+      <template is="dom-repeat" items="{{images}}">
+        <iron-image placeholder=""
+                    data-src$="[[item]]"
+                    sizing="contain"
+                    preload=""
+                    fade="" class="view"></iron-image>
+      </template>
+    </skeleton-carousel>
+  </div>
+  </div>

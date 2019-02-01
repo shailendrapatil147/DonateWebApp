@@ -27,6 +27,16 @@ module.exports = merge(baseConfig(config), {
         use: 'ts-loader',
         exclude: /node_modules/
       },
+      {
+        test: /\.(png|jpg|gif)$/i,
+        use: [{
+          loader: 'url-loader',
+          options: { 
+              limit: 8000, // Convert images < 8kb to base64 strings
+              name: 'images/[hash]-[name].[ext]'
+          } 
+      }]
+      },
     ],
   },
   plugins: [

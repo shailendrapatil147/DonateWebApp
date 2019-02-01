@@ -13,6 +13,11 @@ declare module '*.css' {
   export default content;
 }
 
+declare module '*.png' {
+  const content: string;
+  export default content;
+}
+
 declare module '@polymer/polymer/polymer-element' {
   // noinspection TsLint
   export const PolymerElement: any;

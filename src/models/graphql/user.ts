@@ -1,27 +1,38 @@
 import gql from 'graphql-tag';
 
-export const userFragment =gql`
+const addUser =gql`fragment addUser on UserType{
+                                        firstName
+                                        lastName
+                                        email
+                                        password
+                                        phoneNumber
+                                        roleId
+                                        address
+                            }`;
+
+const userFragment =gql`
                         fragment user on UserType{
                                     id
-                                    firstName
-                                    lastName
-                                    email
-                                    password
-                                    phoneNumber
-                                    role_Id
-                                    address
-                        }`;
+                                    ...addUser
+                        }
+                        ${addUser}`;
 
 export const loginUser = gql`query user($email: String!, $password : String!){
                                         user(email: $email, password: $password){
-                                        ...user
+                                            ...user
                                         }
                             }
-                            
                             ${userFragment}`;
+    
+export const registerUser = gql`mutation addAsync($user: AddUserInputType!) {
+                                    addAsync(addUser: $user) {
+                                        ...addUser   
+                                    }
+                                }  
+                                    ${addUser}`;
 
 export class User{
-    public constructor(){
+    constructor(){
     }
 
     private _id:number;
@@ -29,7 +40,7 @@ export class User{
     private _lastName: String;
     private _email: String;
     private _phoneNumber: String;
-    private _role_Id: number;
+    private _roleId: number;
     private _address: String;
     private _password: String;
   
@@ -68,11 +79,11 @@ export class User{
         this._phoneNumber = phoneNumber;
     }
 
-    get role_Id(): number{
-        return this._role_Id;
+    get roleId(): number{
+        return this._roleId;
     }
-    set role_Id(role_Id: number){
-        this._role_Id = role_Id;
+    set roleId(roleId: number){
+        this._roleId = roleId;
     }
 
     get address(): String{
@@ -88,4 +99,24 @@ export class User{
     set password(password: String){
         this._password = password;
     }
+
+    public toJSON(): any {
+        const proto = Object.getPrototypeOf(this);
+        const jsonObj: any = {};
+      
+        Object.entries(Object.getOwnPropertyDescriptors(proto))
+          .filter(([key, descriptor]) => typeof descriptor.get === 'function')
+          .map(([key, descriptor]) => {
+            if (descriptor && key[0] !== '_') {
+              try {
+                const val = (this as any)[key];
+                jsonObj[key] = val;
+              } catch (error) {
+                console.error(`Error calling getter ${key}`, error);
+              }
+            }
+          });
+      
+        return jsonObj;
+      }
 }

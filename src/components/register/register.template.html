@@ -2,17 +2,26 @@
 <div class="card register">
   <h1>Signup!</h1>
 
-  <paper-input value="{{user.firstName::input}}"  label="First Name"  auto-validate pattern="[a-zA-Z]*" maxlength="20" error-message="maximum 20 letters only!"></paper-input>
-  <paper-input value="{{user.lastName::input}}" label="Last Name"  auto-validate pattern="[a-zA-Z]*" maxlength="20" error-message="maximum 20 letters only!" ></paper-input>
-  <paper-input value="{{user.email::input}}" label="Email" pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$" auto-validate  error-message="invalid email!">
-      <iron-icon icon="mail" slot="prefix"></iron-icon>
+  <paper-input value="{{user.firstName::input}}"  label="First Name" required auto-validate pattern="[a-zA-Z]*" maxlength="20" error-message="maximum 20 letters only!"></paper-input>
+  <paper-input value="{{user.lastName::input}}" label="Last Name"  auto-validate required pattern="[a-zA-Z]*" maxlength="20" error-message="maximum 20 letters only!" ></paper-input>
+  <paper-input value="{{user.email::input}}" label="Email" required pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$" auto-validate  error-message="invalid email!"></paper-input>
+  <paper-input label="Password"  type="password" maxlength="15" auto-validate required  value="{{user.password}}" error-message="pssword required!"></paper-input>
+  <!-- <iron-icon icon="mail" slot="prefix"></iron-icon>
       <div slot="suffix">@email.com</div>
       <paper-icon-button slot="suffix" on-click="clearInput" icon="clear" alt="clear" title="clear">
-      </paper-icon-button>
-    </paper-input>
+      </paper-icon-button> -->
+   <div>
+      <paper-dropdown-menu label="role types"   no-animations>
+        <paper-listbox slot="dropdown-content" name="roletypes" id="roletypes" attr-for-selected="value" selected="{{user.roleId}}" class="dropdown-content">
+            <template is="dom-repeat" items="{{roletypes}}" filter="{{onmatch(key)}}">
+                <paper-item value$="{{item.roleId}}">{{item.name}}</paper-item>
+            </template>
+        </paper-listbox>
+    </div>  
   <!-- <paper-input label="Email"  pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$" auto-validate  error-message="invalid email!"></paper-input> -->
-  <paper-input label="Mobile"  pattern="^[0-9]*$" maxlength="13" auto-validate  error-message="invalid mobile!" value="{{user.phoneNumber}}"></paper-input>
-  <paper-textarea label="Address" rows="3" maxRows="5" char-counter maxlength="100" value="{{user.address}}"></paper-textarea>  
-  
-  <paper-button raised class="indigo" on-tap="submit">Register</paper-button>
+  <paper-input label="Mobile"  pattern="^[0-9]*$" maxlength="13" required auto-validate  error-message="invalid mobile!" value="{{user.phoneNumber}}"></paper-input>
+  <paper-textarea label="Address" rows="3" maxRows="5" char-counter required maxlength="100" value="{{user.address}}"></paper-textarea>  
+  <!-- <paper-input type="number" label="roleId" required auto-validate value="{{user.roleId}}" error-message="invalid roleId!"> -->
+  </paper-input>
+  <paper-button raised class="indigo" on-tap="register">Register</paper-button>
 </div>

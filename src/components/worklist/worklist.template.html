@@ -1,0 +1,42 @@
+<app-location route="{{route}}" query-params="{{queryParams}}"></app-location>
+<div class="element">  
+  
+  <!-- <div>
+    <paper-dropdown-menu label="Interested Field"   no-animations>
+      <paper-listbox slot="dropdown-content" name="InterestedField" id="InterestedField" class="dropdown-content">
+          <template is="dom-repeat" items="{{interestedfield}}" filter="{{onmatch(key)}}">
+              <paper-item value$="{{item.name}}">{{item.name}}</paper-item>
+          </template>
+      </paper-listbox>
+  </div>   -->
+
+  <vaadin-grid  name ="vaadin-grid" id ="vaadingrid" active-item="{{activeItem}}" aria-label="Work Details">
+      <vaadin-grid-column>
+        <template class="header">Title</template>      
+        <template>[[item.title]]</template>      
+      </vaadin-grid-column>
+      <vaadin-grid-column>
+        <template class="header">Start Date</template>      
+        <template>[[item.startDate]]</template>      
+      </vaadin-grid-column>
+      <vaadin-grid-column>
+        <template class="header">End Date</template>      
+        <template>[[item.endDate]]</template>      
+      </vaadin-grid-column>
+      <vaadin-grid-column>
+          <template class="header">Description</template>      
+          <template>[[item.description]]</template>      
+        </vaadin-grid-column>
+      <vaadin-grid-column>
+        <template class="header">Details</template>
+        <template><paper-icon-button  focused="{{selected}}" icon="icons:assignment" id="edit" on-click="getDetails" data-arg="{{item.workId}}" >Details</paper-icon-button></template>
+        <!-- <template><paper-icon-button  focused="{{selected}}" icon="arrow-forward" id="details"></paper-icon-button></template>       -->
+    </vaadin-grid-column>
+    <vaadin-grid-column hidden$="{{!isNGO}}">
+        <template class="header">Subscribed Donors</template>
+        <template><paper-icon-button  focused="{{selected}}" on-click="getSubscribedUser" icon="icons:assignment-ind" id="Subscribed"></paper-icon-button></template>
+    </vaadin-grid-column>   
+  </vaadin-grid>  
+  
+</div>
+

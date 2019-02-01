@@ -1,0 +1,27 @@
+<app-location route="{{route}}" query-params="{{queryParams}}"></app-location>
+<div class="element card">  
+  <vaadin-grid  name ="vaadin-grid" id ="vaadingrid" active-item="{{activeItem}}" aria-label="Work Details">
+      <vaadin-grid-column>
+        <template class="header">User Name</template>      
+        <template>[[item.firstName]]</template>      
+      </vaadin-grid-column>
+      <vaadin-grid-column>
+        <template class="header">Available Date</template>      
+        <template>[[item.availableDate]]</template>      
+      </vaadin-grid-column>
+      <vaadin-grid-column>
+        <template class="header">Hrs Contribution</template>      
+        <template>[[item.hrsContribution]]</template>      
+      </vaadin-grid-column>
+      <vaadin-grid-column>
+          <template class="header">Notes</template>      
+          <template>[[item.notes]]</template>      
+        </vaadin-grid-column>
+      <!-- <vaadin-grid-column>
+        <template class="header">Details</template>
+        <template><paper-icon-button  on-click="getDetails" focused="{{selected}}" icon="arrow-forward" id="details"></paper-icon-button></template>      
+    </vaadin-grid-column>    -->
+  </vaadin-grid>  
+  
+</div>
+
