@@ -26,12 +26,13 @@ export class PublishWork extends PolymerElement {
     super();
     this.work = new Work();
     this.work.workTypeId =1;
-    this.work.workId = 5;
-    this.work.ngoId = 4; 
+    this.work.workId = Math.floor((Math.random() * 100) + 1);
+    this._subscribe();
   }
 
   ready(){
     super.ready();
+    store.subscribe(() => this._subscribe());
   }
 
   static get is() {
@@ -49,7 +50,7 @@ export class PublishWork extends PolymerElement {
         addWork: this.work.toJSON()
       },
 
-    }).then((data: any) => {if(data.data.addWork){
+    }).then((data: any) => {if(data.data){
                               // store.dispatch(actions.userlogin(data.data.user));
                               this.set('route.path', '/ngodashboard');                           
                             }
@@ -59,5 +60,11 @@ export class PublishWork extends PolymerElement {
       .catch((error: any) => store.dispatch(actions.error(WebApiErrors.INTERNALSERVERERROR)));
   }
   
+  _subscribe(): void {
+    const state = store.getState();
+    if(state.loginreducer.user && state.loginreducer.user.email ) {
+        this.work.ngoId = state.loginreducer.user.id;
+    }
+  }
 }
 window.customElements.define(PublishWork.is, PublishWork);

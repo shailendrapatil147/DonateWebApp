@@ -10,17 +10,25 @@
   </paper-input>
   <paper-input label="End Date" disabled Value="{{work.endDate}}">
       <iron-icon icon="date-range" slot="prefix"></iron-icon>      
-  </paper-input>  
-  
-  <iron-label>Interested for Contribution</iron-label>
-      <paper-radio-group attr-for-selected="name" selected="{{workRequest.isaccepted}}" allow-empty-selection > 
-        <paper-radio-button name="true">Yes</paper-radio-button>
-        <paper-radio-button name="false">No</paper-radio-button>
-      </paper-radio-group>
-  <paper-input id="hrsContribution" type="number" value="{{workRequest.hrsContribution}}" label="Hrs will be Contributed"></paper-input>
-  <vaadin-date-picker label="Available Date" value="{{workRequest.availableDate}}" name="availabledate" id="availabledate" placeholder="">
-  </vaadin-date-picker>
-  <paper-textarea label="Remark if any" id="notes" name="notes" value="{{workRequest.notes}}" rows="3" maxRows="5" char-counter maxlength="100"></paper-textarea>  
-  
-  <paper-button raised class="indigo" on-tap="submit">Submit</paper-button>
+  </paper-input>
+  <div hidden$="{{isNGO}}">
+      <div hidden$="{{!isSubscribe}}">
+          <br/><br/><br/>
+        <h6>You have already Subscribed to this work.</h6>
+      </div>
+      <div hidden$="{{isSubscribe}}">
+          <br/><br/>
+          <iron-label>Contribute</iron-label>
+          <!-- <paper-radio-group attr-for-selected="name" selected="{{workRequest.isaccepted}}" allow-empty-selection > 
+            <paper-radio-button name="true">Yes</paper-radio-button>
+            <paper-radio-button name="false">No</paper-radio-button>
+          </paper-radio-group> -->
+          <paper-input id="hrsContribution" type="number" value="{{workRequest.hrsContribution}}" label="Hrs will be Contributed"></paper-input>
+          <vaadin-date-picker label="Available Date" value="{{workRequest.availableDate}}" name="availabledate" id="availabledate" placeholder="">
+          </vaadin-date-picker>
+          <paper-textarea label="Remark if any" id="notes" name="notes" value="{{workRequest.notes}}" rows="3" maxRows="5" char-counter maxlength="100"></paper-textarea>  
+          
+          <paper-button raised class="indigo" on-tap="submit">Submit</paper-button>
+      </div>
+    </div>
 </div>

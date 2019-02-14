@@ -53,7 +53,7 @@ export class DonateApp extends PolymerElement {
         this.loggedin = false;
     }
 
-    if(state.errorreducer.error && state.errorreducer.error.length > 0){
+    if(state.errorreducer.error && state.errorreducer.error.length > 0 && state.errorreducer.error.toString().sub){
       this.error = state.errorreducer.error;
       this.toggleError();
       store.dispatch(actions.error(""));

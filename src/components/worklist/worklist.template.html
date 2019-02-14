@@ -34,7 +34,7 @@
     </vaadin-grid-column>
     <vaadin-grid-column hidden$="{{!isNGO}}">
         <template class="header">Subscribed Donors</template>
-        <template><paper-icon-button  focused="{{selected}}" on-click="getSubscribedUser" icon="icons:assignment-ind" id="Subscribed"></paper-icon-button></template>
+        <template><paper-icon-button  focused="{{selected}}" on-click="getSubscribedUser" icon="icons:assignment-ind" id="Subscribed" data-arg="{{item.workId}}"></paper-icon-button></template>
     </vaadin-grid-column>   
   </vaadin-grid>  
   

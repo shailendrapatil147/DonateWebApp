@@ -11,9 +11,13 @@ import '@polymer/paper-item/paper-item.js';
 
 import {donarQueryApolloClient} from '../../services/donor-query-apollo-client';
 import {workrequest, GetAllWorkRequests} from '../../models/graphql/workrequest';
+import { store } from '../../redux/stores/store';
 
 export class SubscribedUser extends PolymerElement {
   $: any;
+  workId: number;
+  isUsers: boolean;
+
  workRequest: workrequest;
   static get is() {
     return 'subscribed-user';
@@ -23,9 +27,13 @@ export class SubscribedUser extends PolymerElement {
     return html([`<style include="shared-styles">${style}</style>${view}`]);
   }   
 
-  ready()
-  {
-    super.ready();        
+   ready(){
+   super.ready();
+   store.subscribe(() => this._subscribe()); 
+   this._subscribe();   
+   //const datePicker = document.querySelector("vaadin-date-picker");
+   //datePicker.addEventListener("value-changed",  console.log(datePicker));
+  
   }
   
   getDetails() {           
@@ -35,22 +43,35 @@ export class SubscribedUser extends PolymerElement {
 
   constructor(){
     super(); 
-
     this.workRequest = new workrequest();
-
-    var client = donarQueryApolloClient.watchQuery<any>({
-      query:GetAllWorkRequests,
-      variables:{workId:1}
-    }).subscribe({
-      next: ({data, loading}) => {        
-        this.$.vaadingrid.items = data.getAllWorkRequests;           
-      }
-    })
-      
+    this.isUsers = false;    
   }
 
-  worklist(){   
-    
+  worklist(){      
+  }
+
+  _subscribe(): void{
+    const state = store.getState();
+    if(state.workdetailreducer && state.workdetailreducer.workId ) {
+      this.workId = state.workdetailreducer.workId ;
+      if(this.workId > 0){
+        var client = donarQueryApolloClient.watchQuery<any>({
+          query:GetAllWorkRequests,
+          variables:{workId:this.workId}
+        }).subscribe({
+          next: ({data, loading}) => {
+            if(data.getAllWorkRequests.length > 0){
+              this.isUsers = true        
+              this.$.vaadingrid.items = data.getAllWorkRequests; 
+            }
+            else{
+              this.isUsers = false;
+            }
+                      
+          }
+        });    
+      }     
+    }      
   }
 }
 

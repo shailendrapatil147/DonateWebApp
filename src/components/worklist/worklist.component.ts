@@ -58,7 +58,9 @@ export class WorkList extends PolymerElement {
     this.set('route.path', '/workdetail');
   }
 
-  getSubscribedUser(){
+  getSubscribedUser(e: any){
+    e.currentTarget.dataArg
+    store.dispatch(actions.workdetail(e.currentTarget.dataArg)); 
     this.set('route.path', '/subscribeduser');  
   }
 
